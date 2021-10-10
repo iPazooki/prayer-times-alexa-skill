@@ -1,11 +1,11 @@
 ﻿using Alexa.NET.Request;
+using Alexa.NET.Request.Type;
 using Alexa.NET.Response;
 using Flurl.Http;
 using PrayerTimes.Domain;
 using System;
 using System.Threading.Tasks;
 using System.Web;
-using Alexa.NET.Request.Type;
 
 namespace PrayerTimes.Service
 {

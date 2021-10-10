@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31727.386
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrayerTime", "PrayerTime.csproj", "{60441556-2DEA-478F-9216-61DD653F9C34}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrayerTime.Tests", "..\PrayerTime.Tests\PrayerTime.Tests.csproj", "{F2686F18-C09A-463C-B021-55EEE59D2301}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60441556-2DEA-478F-9216-61DD653F9C34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60441556-2DEA-478F-9216-61DD653F9C34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60441556-2DEA-478F-9216-61DD653F9C34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60441556-2DEA-478F-9216-61DD653F9C34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2686F18-C09A-463C-B021-55EEE59D2301}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2686F18-C09A-463C-B021-55EEE59D2301}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2686F18-C09A-463C-B021-55EEE59D2301}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2686F18-C09A-463C-B021-55EEE59D2301}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4F809D30-D3E4-40F4-8487-5511E6118915}
+	EndGlobalSection
+EndGlobal

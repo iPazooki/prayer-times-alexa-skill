@@ -9,7 +9,8 @@
   "region": "eu-west-2",
   "configuration": "Release",
   "framework": "netcoreapp3.1",
-  "s3-prefix": "PrayerTimes/",
-  "template": "serverless.template",
-  "template-parameters": ""
+  "function-runtime": "dotnetcore3.1",
+  "function-memory-size": 256,
+  "function-timeout": 30,
+  "function-handler": "PrayerTime::PrayerTime.Function::FunctionHandler"
 }

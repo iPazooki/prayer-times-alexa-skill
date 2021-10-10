@@ -2,11 +2,9 @@ using Alexa.NET;
 using Alexa.NET.Request;
 using Alexa.NET.Request.Type;
 using Alexa.NET.Response;
-using Alexa.NET.Response.Directive;
 using Amazon.Lambda.Core;
-using PrayerTimes.Service;
 using Newtonsoft.Json;
-using System;
+using PrayerTimes.Service;
 using System.Threading.Tasks;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.

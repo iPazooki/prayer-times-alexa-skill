@@ -3,3 +3,7 @@
 ################################################################################
 
 /PrayerTime/.vs/PrayerTime
+/PrayerTime/bin/Debug/netcoreapp3.1
+/PrayerTime/obj
+/PrayerTime.Tests/bin/Debug/netcoreapp3.1
+/PrayerTime.Tests/obj
