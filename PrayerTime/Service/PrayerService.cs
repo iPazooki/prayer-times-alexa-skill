@@ -2,12 +2,12 @@
 using Alexa.NET.Request.Type;
 using Alexa.NET.Response;
 using Flurl.Http;
-using PrayerTimes.Domain;
+using PrayerTime.Domain;
 using System;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace PrayerTimes.Service
+namespace PrayerTime.Service
 {
     public class PrayerService : IPrayerService
     {
@@ -37,7 +37,7 @@ namespace PrayerTimes.Service
                                 <break time=""1s""/>
                                 <p>My country is the United Kingdom and my city is London</p>
                                 <break time=""1s""/>
-                                <p>Now please tell me where do you live?<p>
+                                <p>Now please tell me where do you live?</p>
                             </speak>";
 
                 return new SsmlOutputSpeech(ssml);

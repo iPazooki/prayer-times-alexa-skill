@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PrayerTimes.Domain
+namespace PrayerTime.Domain
 {
     public class Timings
     {

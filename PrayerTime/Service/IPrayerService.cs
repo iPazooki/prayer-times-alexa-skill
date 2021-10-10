@@ -1,10 +1,10 @@
 ﻿using Alexa.NET.Request;
 using Alexa.NET.Response;
-using PrayerTimes.Domain;
+using PrayerTime.Domain;
 using System;
 using System.Threading.Tasks;
 
-namespace PrayerTimes.Service
+namespace PrayerTime.Service
 {
     public interface IPrayerService
     {

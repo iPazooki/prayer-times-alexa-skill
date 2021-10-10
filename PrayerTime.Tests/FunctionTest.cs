@@ -1,10 +1,10 @@
 using FluentAssertions;
-using PrayerTimes.Service;
+using PrayerTime.Service;
 using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace PrayerTimes.Tests
+namespace PrayerTime.Tests
 {
     public class FunctionTest
     {
