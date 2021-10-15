@@ -18,7 +18,7 @@ namespace PrayerTime
         {
             ILambdaLogger log = context.Logger;
 
-            log.LogLine($"Skill Request Object:" + JsonConvert.SerializeObject(input));
+            //log.LogLine($"Skill Request Object:" + JsonConvert.SerializeObject(input));
 
             Session session = input.Session;
 
@@ -52,13 +52,22 @@ namespace PrayerTime
                         {
                             var speech = await namazService.PerayerTimeByCoordinate(input);
 
-                            return ResponseBuilder.Tell(speech);
+                            Reprompt rp = new Reprompt("Prayer start");
+
+                            return ResponseBuilder.Ask(speech, rp, session);
                         }
                     case "PrayerByCityIntent":
                         {
+                            string userCountry = intentRequest.Intent.Slots["Country"].Value;
+                            string userCity = intentRequest.Intent.Slots["City"].Value;
+
+                            log.LogLine($"Country and City is: {userCountry} - {userCity}:");
+
                             var speech = await namazService.PerayerTimeByCity(input);
 
-                            return ResponseBuilder.Tell(speech);
+                            Reprompt rp = new Reprompt("Prayer start");
+
+                            return ResponseBuilder.Ask(speech, rp, session);
                         }
                     default:
                         {

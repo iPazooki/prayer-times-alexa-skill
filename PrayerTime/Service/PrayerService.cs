@@ -29,11 +29,10 @@ namespace PrayerTime.Service
             if (input.Context?.Geolocation == null)
             {
                 var ssml = @"<speak>
-                                <amazon:emotion name=""disappointed"" intensity=""high"">
+                                <amazon:emotion name=""disappointed"" intensity=""low"">
                                     Sorry, I don't have access to your device location, please give me access from the application setting.
                                 </amazon:emotion>
-                                <break time=""1s""/>
-                                <p>But for now, please tell me when do you live. It should be like:</p>
+                                <p>But for now, please tell me where do you live. It should be like:</p>
                                 <break time=""1s""/>
                                 <p>My country is the United Kingdom and my city is London</p>
                                 <break time=""1s""/>
@@ -64,19 +63,27 @@ namespace PrayerTime.Service
         {
             var intentRequest = (IntentRequest)input.Request;
 
-            string userCountry = intentRequest.Intent.Slots["Coutry"].Value;
+            string userCountry = intentRequest.Intent.Slots["Country"].Value;
             string userCity = intentRequest.Intent.Slots["City"].Value;
 
-            var time = input.Request?.Timestamp ?? DateTime.Now;
+            var speech = new SsmlOutputSpeech();
 
-            var timings = await GetTimings(time, userCountry, userCity);
-
-            var speech = new SsmlOutputSpeech
+            if (string.IsNullOrEmpty(userCountry) || string.IsNullOrEmpty(userCity))
             {
-                Ssml = _ssml.Replace("#FAJR#", timings.Fajr)
-                            .Replace("#DHUHR#", timings.Dhuhr)
-                            .Replace("#MAGHRIB#", timings.Maghrib)
-            };
+                speech.Ssml = "<speak>Sorry, I didn't get your country and city! Could you please repeat again?</speak>";
+
+                return speech;
+            }
+            else
+            {
+                var time = input.Request?.Timestamp ?? DateTime.Now;
+
+                var timings = await GetTimings(time, userCountry, userCity);
+
+                speech.Ssml = _ssml.Replace("#FAJR#", timings.Fajr)
+                                .Replace("#DHUHR#", timings.Dhuhr)
+                                .Replace("#MAGHRIB#", timings.Maghrib);
+            }
 
             return speech;
         }
