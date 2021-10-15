@@ -83,14 +83,14 @@ namespace PrayerTime.Service
 
         public async Task<Timings> GetTimings(DateTime adhanDate, double latitude, double longitude)
         {
-            var prayerResponse = await $"https://api.aladhan.com/v1/timings/{adhanDate.ToString("dd-MM-yyyy")}?latitude={latitude}&longitude={longitude}&method=7".GetJsonAsync<PrayerResponse>();
+            var prayerResponse = await $"https://h1ryfdg1p5.execute-api.eu-west-2.amazonaws.com/pro/timings?date_or_timestamp={adhanDate.ToString("dd-MM-yyyy")}&latitude={latitude}&longitude={longitude}&method=7".GetJsonAsync<PrayerResponse>();
 
             return prayerResponse.data.timings;
         }
 
         public async Task<Timings> GetTimings(DateTime adhanDate, string country, string city)
         {
-            var prayerResponse = await $"https://api.aladhan.com/v1/timingsByCity/{adhanDate.ToString("dd-MM-yyyy")}?city={HttpUtility.UrlEncode(city)}&country={HttpUtility.UrlEncode(country)}&method=7".GetJsonAsync<PrayerResponse>();
+            var prayerResponse = await $"https://h1ryfdg1p5.execute-api.eu-west-2.amazonaws.com/pro/timingsbycity?date_or_timestamp={adhanDate.ToString("dd-MM-yyyy")}&city={HttpUtility.UrlEncode(city)}&country={HttpUtility.UrlEncode(country)}&method=7".GetJsonAsync<PrayerResponse>();
 
             return prayerResponse.data.timings;
         }
