@@ -9,6 +9,12 @@ This skill provides an easy way to retrieve prayer times.
 - **Alexa**, Ask Prayer Times, adhan times?
 - **Alexa**, Ask Prayer Times, when is namaz times?
 
+If this skill doesn't have access to your device location it would ask about your current country and city, please say:
+
+ - Country **United Kingdom** City **London**
+ - Country is the **United Kingdom** and the city is **London**
+ - My country is the **United Kingdom** and my city is **London**
+ - I live in the **United Kingdom** and **London**
 
 #### Please note:
 
