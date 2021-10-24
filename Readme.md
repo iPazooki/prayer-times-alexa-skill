@@ -4,10 +4,10 @@ This skill provides an easy way to retrieve prayer times.
 
 ### Instruction:
 
-**Alexa**, Prayer times?
-**Alexa**, Ask Prayer Times, namaz times?
-**Alexa**, Ask Prayer Times, adhan times?
-**Alexa**, Ask Prayer Times, when is namaz times?
+- **Alexa**, Prayer times?
+- **Alexa**, Ask Prayer Times, namaz times?
+- **Alexa**, Ask Prayer Times, adhan times?
+- **Alexa**, Ask Prayer Times, when is namaz times?
 
 
 #### Please note:
