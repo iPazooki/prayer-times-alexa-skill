@@ -1,17 +1,21 @@
-﻿using Alexa.NET.Request;
-using Alexa.NET.Request.Type;
-using Alexa.NET.Response;
+﻿using System;
+using System.Web;
+using System.Threading.Tasks;
 using Flurl.Http;
 using PrayerTime.Domain;
-using System;
-using System.Threading.Tasks;
-using System.Web;
+using Alexa.NET.Request;
+using Alexa.NET.Response;
+using Alexa.NET.Request.Type;
 
 namespace PrayerTime.Service
 {
     public class PrayerService : IPrayerService
     {
-        private const string _ssml = @"<speak>
+        private const string GET_BY_CITY = "https://vdr4aoq5zi.execute-api.eu-west-2.amazonaws.com/production/city";
+
+        private const string GET_BY_LOCATION = "https://vdr4aoq5zi.execute-api.eu-west-2.amazonaws.com/production/location";
+
+        private const string SSML = @"<speak>
                                             <amazon:emotion name=""excited"" intensity=""high"">
                                                 Today prayer time is
                                             </amazon:emotion>
@@ -24,7 +28,7 @@ namespace PrayerTime.Service
                                             <break time=""1s""/>
                                         </speak>";
 
-        public async Task<SsmlOutputSpeech> PerayerTimeByCoordinate(SkillRequest input)
+        public async Task<SsmlOutputSpeech> PrayerTimeByCoordinate(SkillRequest input)
         {
             if (input.Context?.Geolocation == null)
             {
@@ -42,29 +46,31 @@ namespace PrayerTime.Service
                 return new SsmlOutputSpeech(ssml);
             }
 
-            var time = input.Request?.Timestamp ?? DateTime.Now;
+            var dateTime = input.Request?.Timestamp ?? DateTime.Now;
 
             var lat = input.Context.Geolocation.Coordinate.Latitude;
+
             var lon = input.Context.Geolocation.Coordinate.Longitude;
 
-            var timings = await GetTimings(time, lat, lon);
+            var adhanTime = await GetAdhanTime(DateOnly.FromDateTime(dateTime), lat, lon);
 
             var speech = new SsmlOutputSpeech
             {
-                Ssml = _ssml.Replace("#FAJR#", timings.Fajr)
-                            .Replace("#DHUHR#", timings.Dhuhr)
-                            .Replace("#MAGHRIB#", timings.Maghrib)
+                Ssml = SSML.Replace("#FAJR#", adhanTime.Fajr)
+                    .Replace("#DHUHR#", adhanTime.Dhuhr)
+                    .Replace("#MAGHRIB#", adhanTime.Maghrib)
             };
 
             return speech;
         }
 
-        public async Task<SsmlOutputSpeech> PerayerTimeByCity(SkillRequest input)
+        public async Task<SsmlOutputSpeech> PrayerTimeByCity(SkillRequest input)
         {
-            var intentRequest = (IntentRequest)input.Request;
+            var intentRequest = (IntentRequest) input.Request;
 
-            string userCountry = intentRequest.Intent.Slots["Country"].Value;
-            string userCity = intentRequest.Intent.Slots["City"].Value;
+            var userCountry = intentRequest.Intent.Slots["Country"].Value;
+
+            var userCity = intentRequest.Intent.Slots["City"].Value;
 
             var speech = new SsmlOutputSpeech();
 
@@ -74,32 +80,32 @@ namespace PrayerTime.Service
 
                 return speech;
             }
-            else
-            {
-                var time = input.Request?.Timestamp ?? DateTime.Now;
 
-                var timings = await GetTimings(time, userCountry, userCity);
+            var dateTime = input.Request?.Timestamp ?? DateTime.Now;
 
-                speech.Ssml = _ssml.Replace("#FAJR#", timings.Fajr)
-                                .Replace("#DHUHR#", timings.Dhuhr)
-                                .Replace("#MAGHRIB#", timings.Maghrib);
-            }
+            var timings = await GetAdhanTime(DateOnly.FromDateTime(dateTime), userCountry, userCity);
+
+            speech.Ssml = SSML.Replace("#FAJR#", timings.Fajr)
+                .Replace("#DHUHR#", timings.Dhuhr)
+                .Replace("#MAGHRIB#", timings.Maghrib);
 
             return speech;
         }
 
-        public async Task<Timings> GetTimings(DateTime adhanDate, double latitude, double longitude)
+        public async Task<Timings> GetAdhanTime(DateOnly adhanDate, double latitude, double longitude)
         {
-            var prayerResponse = await $"https://h1ryfdg1p5.execute-api.eu-west-2.amazonaws.com/pro/timings?date_or_timestamp={adhanDate.ToString("dd-MM-yyyy")}&latitude={latitude}&longitude={longitude}&method=7".GetJsonAsync<PrayerResponse>();
+            // Send an API call to retrieve prayer time
+            var prayerResponse = await $"{GET_BY_LOCATION}?date={adhanDate.ToString("dd-MM-yyyy")}&latitude={latitude}&longitude={longitude}&method=7".GetJsonAsync<PrayerResponse>();
 
-            return prayerResponse.data.timings;
+            return prayerResponse.Data.Timings;
         }
 
-        public async Task<Timings> GetTimings(DateTime adhanDate, string country, string city)
+        public async Task<Timings> GetAdhanTime(DateOnly adhanDate, string country, string city)
         {
-            var prayerResponse = await $"https://h1ryfdg1p5.execute-api.eu-west-2.amazonaws.com/pro/timingsbycity?date_or_timestamp={adhanDate.ToString("dd-MM-yyyy")}&city={HttpUtility.UrlEncode(city)}&country={HttpUtility.UrlEncode(country)}&method=7".GetJsonAsync<PrayerResponse>();
+            // Send an API call to retrieve prayer time
+            var prayerResponse = await $"{GET_BY_CITY}?date={adhanDate.ToString("dd-MM-yyyy")}&city={HttpUtility.UrlEncode(city)}&country={HttpUtility.UrlEncode(country)}&method=7".GetJsonAsync<PrayerResponse>();
 
-            return prayerResponse.data.timings;
+            return prayerResponse.Data.Timings;
         }
     }
 }

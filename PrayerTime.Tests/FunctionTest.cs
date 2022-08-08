@@ -1,26 +1,26 @@
-using FluentAssertions;
-using PrayerTime.Service;
 using System;
 using System.Threading.Tasks;
+using FluentAssertions;
+using PrayerTime.Service;
 using Xunit;
 
 namespace PrayerTime.Tests
 {
     public class FunctionTest
     {
-        private readonly IPrayerService prayerService;
+        private readonly IPrayerService _prayerService;
 
         public FunctionTest()
         {
-            prayerService = new PrayerService();
+            _prayerService = new PrayerService();
         }
 
         [Fact]
         public async Task Test_Prayer_By_City()
         {
-            prayerService.Should().NotBeNull();
+            _prayerService.Should().NotBeNull();
 
-            var result = await prayerService.GetTimings(DateTime.Now, "United Kingdom", "London");
+            var result = await _prayerService.GetAdhanTime(DateOnly.FromDateTime(DateTime.Now), "United Kingdom", "London");
 
             result.Should().NotBeNull();
 
@@ -32,9 +32,9 @@ namespace PrayerTime.Tests
         [Fact]
         public async Task Test_Prayer_By_Coordinate()
         {
-            prayerService.Should().NotBeNull();
+            _prayerService.Should().NotBeNull();
 
-            var result = await prayerService.GetTimings(DateTime.Now, 51.5074, 0.1278);
+            var result = await _prayerService.GetAdhanTime(DateOnly.FromDateTime(DateTime.Now), 51.5074, 0.1278);
 
             result.Should().NotBeNull();
 

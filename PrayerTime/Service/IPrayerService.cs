@@ -1,33 +1,37 @@
-﻿using Alexa.NET.Request;
-using Alexa.NET.Response;
-using PrayerTime.Domain;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using PrayerTime.Domain;
+using Alexa.NET.Request;
+using Alexa.NET.Response;
 
 namespace PrayerTime.Service
 {
     public interface IPrayerService
     {
         /// <summary>
-        /// Return adhan times in the specified location.
+        /// Return adhan times in the specified location after calling an API.
         /// </summary>
         /// <param name="adhanDate">Date in this format: DD-MM-YYYY</param>
-        Task<Timings> GetTimings(DateTime adhanDate, double latitude, double longitude);
+        /// <param name="latitude">Latitude of the location</param>
+        /// <param name="longitude">Longitude of the location</param>
+        Task<Timings> GetAdhanTime(DateOnly adhanDate, double latitude, double longitude);
 
         /// <summary>
-        /// Return adhan times in the specified location.
+        /// Return adhan times in the specified country and city after calling an API.
         /// </summary>
         /// <param name="adhanDate">Date in this format: DD-MM-YYYY</param>
-        Task<Timings> GetTimings(DateTime adhanDate, string country, string city);
+        /// <param name="country">Country</param>
+        /// <param name="city">City</param>
+        Task<Timings> GetAdhanTime(DateOnly adhanDate, string country, string city);
 
         /// <summary>
         /// Return Alexa speech response
         /// </summary>
-        Task<SsmlOutputSpeech> PerayerTimeByCoordinate(SkillRequest input);
+        Task<SsmlOutputSpeech> PrayerTimeByCoordinate(SkillRequest input);
 
         /// <summary>
         /// Return Alexa speech response
         /// </summary>
-        Task<SsmlOutputSpeech> PerayerTimeByCity(SkillRequest input);
+        Task<SsmlOutputSpeech> PrayerTimeByCity(SkillRequest input);
     }
 }
