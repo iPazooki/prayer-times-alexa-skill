@@ -11,3 +11,5 @@
 /PrayerTime.Tests/bin/Release/netcoreapp3.1/linux-x64
 /.vs/PrayerTime/v16
 /.vs/PrayerTime/DesignTimeBuild/.dtbcache.v2
+/PrayerTime/bin/Release/net6.0
+/.vs
