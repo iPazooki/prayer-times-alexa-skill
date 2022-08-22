@@ -105,4 +105,3 @@ namespace PrayerTime;
             return ResponseBuilder.Tell("Don't forget me in your prayers, Goodbye!");
         }
     }
-}
