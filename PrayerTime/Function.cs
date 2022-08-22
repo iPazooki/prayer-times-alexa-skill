@@ -5,14 +5,26 @@ using Alexa.NET.Response;
 using Alexa.NET.Request.Type;
 using Amazon.Lambda.Core;
 using PrayerTime.Service;
+using Alexa.NET.ProactiveEvents;
+using Newtonsoft.Json;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
 
-namespace PrayerTime
-{
+namespace PrayerTime;
+
     public class Function
     {
+    public Function()
+    {
+        new ProactiveSubscriptionChangedRequestHandler().AddToRequestHandler();
+    }
+
+    /// <summary>
+    /// The main function for reacting to the user interaction.
+    /// </summary>
+    /// <param name="input">Skill input</param>
+    /// <param name="context">Lambda context</param>
         public async Task<SkillResponse> FunctionHandler(SkillRequest input, ILambdaContext context)
         {
             var log = context.Logger;
@@ -22,6 +34,18 @@ namespace PrayerTime
             var session = input.Session;
 
             var namazService = new PrayerService();
+
+        if (input.Request is ProactiveSubscriptionChangedRequest request)
+        {
+            var remainingEventTypes = request.Body?.Subscriptions;
+
+            if (remainingEventTypes!= null)
+            {
+                log.LogLine($"Notification Changed:" + JsonConvert.SerializeObject(remainingEventTypes));
+            }
+
+            log.LogLine($"Notification type:" + request.Type);
+        }
 
             if (input.Request is LaunchRequest)
             {

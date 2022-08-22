@@ -3,13 +3,8 @@
 ################################################################################
 
 /PrayerTime/.vs/PrayerTime
-/PrayerTime/bin/Debug/netcoreapp3.1
+/PrayerTime/bin
 /PrayerTime/obj
-/PrayerTime.Tests/bin/Debug/netcoreapp3.1
+/PrayerTime.Tests/bin
 /PrayerTime.Tests/obj
-/PrayerTime/bin/Release/netcoreapp3.1
-/PrayerTime.Tests/bin/Release/netcoreapp3.1/linux-x64
-/.vs/PrayerTime/v16
-/.vs/PrayerTime/DesignTimeBuild/.dtbcache.v2
-/PrayerTime/bin/Release/net6.0
 /.vs

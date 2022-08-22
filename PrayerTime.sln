@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31727.386
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrayerTime", ".\PrayerTime\PrayerTime.csproj", "{60441556-2DEA-478F-9216-61DD653F9C34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrayerTime", "PrayerTime\PrayerTime.csproj", "{60441556-2DEA-478F-9216-61DD653F9C34}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrayerTime.Tests", ".\PrayerTime.Tests\PrayerTime.Tests.csproj", "{F2686F18-C09A-463C-B021-55EEE59D2301}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrayerTime.Tests", "PrayerTime.Tests\PrayerTime.Tests.csproj", "{F2686F18-C09A-463C-B021-55EEE59D2301}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
